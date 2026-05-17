@@ -7,6 +7,7 @@ export interface AuthUser {
   name: string;
   studyProgram: string;
   email: string;
+  is_verified?: boolean;
 }
 
 export interface RegisterPayload {
