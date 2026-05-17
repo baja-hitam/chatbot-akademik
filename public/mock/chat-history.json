@@ -1,0 +1,23 @@
+{
+  "data": [
+    {
+      "id": "chat-1",
+      "title": "Jadwal KRS Semester Genap",
+      "updatedAt": "12 Mei 2026",
+      "messages": [
+        {
+          "id": "m-1",
+          "role": "assistant",
+          "content": "Halo, saya siap membantu informasi akademik Anda.",
+          "createdAt": "2026-05-12T08:00:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "chat-2",
+      "title": "Syarat Sidang Tugas Akhir",
+      "updatedAt": "11 Mei 2026",
+      "messages": []
+    }
+  ]
+}

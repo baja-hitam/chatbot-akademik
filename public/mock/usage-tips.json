@@ -1,0 +1,19 @@
+{
+  "data": [
+    {
+      "id": "tip-1",
+      "title": "Gunakan konteks prodi",
+      "example": "Contoh: \"Syarat TA untuk Informatika 2026\""
+    },
+    {
+      "id": "tip-2",
+      "title": "Tanya spesifik per proses",
+      "example": "Contoh: \"Dokumen yudisium yang wajib\""
+    },
+    {
+      "id": "tip-3",
+      "title": "Validasi dengan dokumen resmi",
+      "example": "Contoh: \"Sertakan sumber regulasi terkait\""
+    }
+  ]
+}

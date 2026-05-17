@@ -1,0 +1,28 @@
+{
+  "data": [
+    {
+      "id": "a-1",
+      "title": "Pembukaan pengisian KRS semester genap telah dibuka.",
+      "date": "12 Mei 2026",
+      "status": "info"
+    },
+    {
+      "id": "a-2",
+      "title": "Batas pembayaran UKT diperpanjang hingga 20 Mei 2026.",
+      "date": "10 Mei 2026",
+      "status": "warning"
+    },
+    {
+      "id": "a-3",
+      "title": "Pendaftaran yudisium periode Juni telah tersedia.",
+      "date": "8 Mei 2026",
+      "status": "success"
+    },
+    {
+      "id": "a-4",
+      "title": "Maintenance Sistem Akademik pada 15 Mei 2026.",
+      "date": "7 Mei 2026",
+      "status": "urgent"
+    }
+  ]
+}

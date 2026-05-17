@@ -1,0 +1,28 @@
+{
+  "data": [
+    {
+      "id": "qa-1",
+      "title": "Panduan KRS",
+      "description": "Langkah pengisian KRS online",
+      "href": "#"
+    },
+    {
+      "id": "qa-2",
+      "title": "Panduan TA",
+      "description": "Syarat dan format proposal TA",
+      "href": "#"
+    },
+    {
+      "id": "qa-3",
+      "title": "Panduan KKP",
+      "description": "Ketentuan dan alur KKP",
+      "href": "#"
+    },
+    {
+      "id": "qa-4",
+      "title": "Kalender Akademik",
+      "description": "Jadwal resmi akademik",
+      "href": "#"
+    }
+  ]
+}
