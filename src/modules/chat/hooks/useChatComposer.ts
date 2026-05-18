@@ -1,34 +1,29 @@
-import { useCallback, useMemo, useState } from 'react';
-import type { FormEvent } from 'react';
+import { useForm } from 'react-hook-form';
 
-interface UseChatComposerParams {
-  isSending: boolean;
-  onSend: (message: string) => void;
+export interface ChatComposerFormValues {
+  message: string;
 }
 
-export function useChatComposer({ isSending, onSend }: UseChatComposerParams) {
-  const [input, setInput] = useState('');
-
-  const canSubmit = useMemo(() => input.trim().length > 0 && !isSending, [input, isSending]);
-
-  const handleSubmit = useCallback(
-    (event: FormEvent<HTMLFormElement>) => {
-      event.preventDefault();
-      const value = input.trim();
-      if (!value || isSending) {
-        return;
-      }
-
-      onSend(value);
-      setInput('');
+export function useChatComposer({ isSending, onSend }: { isSending: boolean; onSend: (message: string) => void }) {
+  const { register, handleSubmit, watch, reset } = useForm<ChatComposerFormValues>({
+    defaultValues: {
+      message: '',
     },
-    [input, isSending, onSend],
-  );
+  });
+
+  const message = watch('message') || '';
+  const canSubmit = message.trim().length > 0 && !isSending;
+
+  const onSubmit = (data: ChatComposerFormValues) => {
+    const value = data.message.trim();
+    if (!value) return;
+    onSend(value);
+    reset({ message: '' });
+  };
 
   return {
-    input,
-    setInput,
+    register,
+    handleSubmit: handleSubmit(onSubmit),
     canSubmit,
-    handleSubmit,
   };
 }

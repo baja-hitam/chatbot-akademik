@@ -3,7 +3,7 @@ import axios from 'axios';
 export const AUTH_TOKEN_KEY = 'chatbot_access_token';
 
 export const httpClient = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL ?? '',
+  baseURL: (import.meta as any).env?.VITE_API_BASE_URL ?? '',
   timeout: 600_000,
   headers: {
     'Content-Type': 'application/json',

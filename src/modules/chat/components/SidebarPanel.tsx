@@ -59,7 +59,7 @@ export function SidebarPanel({
                   : 'text-slate-300 hover:bg-slate-800 hover:text-slate-100 border border-transparent'
               }`}
             >
-              <MessageSquare size={16} className={isActive ? 'text-indigo-400' : 'text-slate-500'} />
+              {/* <MessageSquare size={16} className={isActive ? 'text-indigo-400' : 'text-slate-500'} /> */}
               <span className="truncate">{session.title}</span>
             </button>
           );

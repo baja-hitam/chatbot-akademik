@@ -7,11 +7,11 @@ interface ChatComposerProps {
 }
 
 export function ChatComposer({ isSending, onSend }: ChatComposerProps) {
-  const { input, setInput, canSubmit, handleSubmit } = useChatComposer({
-    isSending,
-    onSend,
-  });
-
+  const {
+    register,
+    canSubmit,
+    handleSubmit,
+  } = useChatComposer({ isSending, onSend });
   return (
     <form onSubmit={handleSubmit} className="border-t border-slate-800 bg-slate-950/90 p-4">
       <div className="flex items-center gap-1 rounded-xl border border-slate-700 bg-slate-900 px-2 py-2">
@@ -25,8 +25,7 @@ export function ChatComposer({ isSending, onSend }: ChatComposerProps) {
           <Mic size={16} />
         </button>
         <input
-          value={input}
-          onChange={(event) => setInput(event.target.value)}
+          {...register('message')}
           placeholder="Tulis pertanyaan akademik..."
           className="min-w-0 flex-1 bg-transparent px-2 text-sm text-slate-100 outline-none placeholder:text-slate-500"
           disabled={isSending}

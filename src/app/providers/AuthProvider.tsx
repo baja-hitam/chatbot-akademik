@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import type { ReactNode } from 'react';
-import { getStoredUser, logout as logoutService } from '../../services/authService';
+import { getStoredUser, logout as logoutService } from '../../modules/auth/services/authServices';
 import type { AuthUser } from '../../types/domain';
 import { AuthContext } from './authContext';
 import type { AuthContextValue } from './authContext';

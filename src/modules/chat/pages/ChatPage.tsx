@@ -1,17 +1,18 @@
 import { useNavigate } from '@tanstack/react-router';
 import { useAuth } from '../../../app/providers/authContext';
-import { ChatPageLayout } from '../components/ChatPageLayout';
-import { useAnnouncements } from '../hooks/queries/useAnnouncements';
-import { useQuickAccess } from '../hooks/queries/useQuickAccess';
-import { useUsageTips } from '../hooks/queries/useUsageTips';
+import { DashboardLayout } from '../../../components/layout/DashboardLayout';
+import { ChatPanel } from '../components/ChatPanel';
+import { useAnnouncementsQuery } from '../hooks/useAnnouncementsQuery';
+import { useQuickAccessQuery } from '../hooks/useQuickAccessQuery';
+import { useUsageTipsQuery } from '../hooks/useUsageTipsQuery';
 import { useChatMessages } from '../hooks/useChatMessages';
 
 export function ChatPage() {
   const auth = useAuth();
   const navigate = useNavigate();
-  const announcementsQuery = useAnnouncements();
-  const quickAccessQuery = useQuickAccess();
-  const usageTipsQuery = useUsageTips();
+  const announcementsQuery = useAnnouncementsQuery();
+  const quickAccessQuery = useQuickAccessQuery();
+  const usageTipsQuery = useUsageTipsQuery();
   const chat = useChatMessages();
 
   const handleLogout = async () => {
@@ -28,20 +29,24 @@ export function ChatPage() {
   }
 
   return (
-    <ChatPageLayout
+    <DashboardLayout
       sessions={chat.sessions}
       activeSessionId={chat.activeSessionId}
-      currentMessages={chat.messages}
       announcements={announcementsQuery.data ?? []}
       quickAccess={quickAccessQuery.data ?? []}
       usageTips={usageTipsQuery.data ?? []}
-      isSending={chat.isSending}
       user={auth.user}
       onCreateChat={chat.handleClearChat}
       onSelectSession={chat.handleSelectSession}
-      onSendMessage={chat.handleSendMessage}
-      onClearChat={chat.handleClearChat}
       onLogout={handleLogout}
-    />
+    >
+      <ChatPanel
+        messages={chat.messages}
+        isSending={chat.isSending}
+        isLoadingMessages={chat.messagesQuery.isLoading && chat.activeSessionId !== null}
+        onSendMessage={chat.handleSendMessage}
+        onClearChat={chat.handleClearChat}
+      />
+    </DashboardLayout>
   );
 }
