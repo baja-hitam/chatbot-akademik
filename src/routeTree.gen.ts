@@ -17,6 +17,7 @@ import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/
 import { Route as AuthenticatedUserRouteImport } from './routes/_authenticated/_user'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
 import { Route as AuthenticatedUserIndexRouteImport } from './routes/_authenticated/_user/index'
+import { Route as AuthenticatedAdminUsersRouteImport } from './routes/_authenticated/admin/users'
 import { Route as AuthenticatedAdminProdiRouteImport } from './routes/_authenticated/admin/prodi'
 
 const VerifyOtpRoute = VerifyOtpRouteImport.update({
@@ -57,6 +58,11 @@ const AuthenticatedUserIndexRoute = AuthenticatedUserIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthenticatedUserRoute,
 } as any)
+const AuthenticatedAdminUsersRoute = AuthenticatedAdminUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AuthenticatedAdminRoute,
+} as any)
 const AuthenticatedAdminProdiRoute = AuthenticatedAdminProdiRouteImport.update({
   id: '/prodi',
   path: '/prodi',
@@ -70,6 +76,7 @@ export interface FileRoutesByFullPath {
   '/verify-otp': typeof VerifyOtpRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/admin/prodi': typeof AuthenticatedAdminProdiRoute
+  '/admin/users': typeof AuthenticatedAdminUsersRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesByTo {
@@ -78,6 +85,7 @@ export interface FileRoutesByTo {
   '/register': typeof RegisterRoute
   '/verify-otp': typeof VerifyOtpRoute
   '/admin/prodi': typeof AuthenticatedAdminProdiRoute
+  '/admin/users': typeof AuthenticatedAdminUsersRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesById {
@@ -89,6 +97,7 @@ export interface FileRoutesById {
   '/_authenticated/_user': typeof AuthenticatedUserRouteWithChildren
   '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
   '/_authenticated/admin/prodi': typeof AuthenticatedAdminProdiRoute
+  '/_authenticated/admin/users': typeof AuthenticatedAdminUsersRoute
   '/_authenticated/_user/': typeof AuthenticatedUserIndexRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
 }
@@ -101,9 +110,17 @@ export interface FileRouteTypes {
     | '/verify-otp'
     | '/admin'
     | '/admin/prodi'
+    | '/admin/users'
     | '/admin/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/register' | '/verify-otp' | '/admin/prodi' | '/admin'
+  to:
+    | '/'
+    | '/login'
+    | '/register'
+    | '/verify-otp'
+    | '/admin/prodi'
+    | '/admin/users'
+    | '/admin'
   id:
     | '__root__'
     | '/_authenticated'
@@ -113,6 +130,7 @@ export interface FileRouteTypes {
     | '/_authenticated/_user'
     | '/_authenticated/admin'
     | '/_authenticated/admin/prodi'
+    | '/_authenticated/admin/users'
     | '/_authenticated/_user/'
     | '/_authenticated/admin/'
   fileRoutesById: FileRoutesById
@@ -182,6 +200,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedUserIndexRouteImport
       parentRoute: typeof AuthenticatedUserRoute
     }
+    '/_authenticated/admin/users': {
+      id: '/_authenticated/admin/users'
+      path: '/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AuthenticatedAdminUsersRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
     '/_authenticated/admin/prodi': {
       id: '/_authenticated/admin/prodi'
       path: '/prodi'
@@ -205,11 +230,13 @@ const AuthenticatedUserRouteWithChildren =
 
 interface AuthenticatedAdminRouteChildren {
   AuthenticatedAdminProdiRoute: typeof AuthenticatedAdminProdiRoute
+  AuthenticatedAdminUsersRoute: typeof AuthenticatedAdminUsersRoute
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
 }
 
 const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
   AuthenticatedAdminProdiRoute: AuthenticatedAdminProdiRoute,
+  AuthenticatedAdminUsersRoute: AuthenticatedAdminUsersRoute,
   AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
 }
 

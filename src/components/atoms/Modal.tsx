@@ -41,7 +41,7 @@ export function Modal({ isOpen, onClose, title, children }: ModalProps) {
       {/* Modal Panel */}
       <div 
         ref={modalRef}
-        className="relative w-full max-w-md transform overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 shadow-2xl transition-all"
+        className="relative flex w-full max-w-md flex-col transform overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 shadow-2xl transition-all max-h-[90vh]"
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-headline"
@@ -59,7 +59,7 @@ export function Modal({ isOpen, onClose, title, children }: ModalProps) {
           </button>
         </div>
         
-        <div className="p-6">
+        <div className="p-6 overflow-y-auto">
           {children}
         </div>
       </div>

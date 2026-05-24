@@ -1,4 +1,4 @@
-import { BookOpen, LayoutDashboard, LogOut, UserCircle2, X } from 'lucide-react';
+import { BookOpen, LayoutDashboard, LogOut, UserCircle2, X, Users } from 'lucide-react';
 import type { AuthUser } from '../../../types/domain';
 import { Button } from '../../../components/atoms/Button';
 import { Link } from '@tanstack/react-router';
@@ -59,6 +59,15 @@ export function AdminSidebar({
         >
           <BookOpen size={18} />
           Master Prodi
+        </Link>
+        <Link
+          to="/admin/users"
+          className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-slate-800 hover:text-white"
+          activeProps={{ className: 'bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500/20' }}
+          onClick={onClose}
+        >
+          <Users size={18} />
+          Manajemen Pengguna
         </Link>
       </nav>
 
