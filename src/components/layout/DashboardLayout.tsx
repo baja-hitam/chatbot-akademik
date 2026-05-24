@@ -1,4 +1,5 @@
-import { useState, isValidElement, cloneElement, ReactElement } from 'react';
+import { useState, isValidElement, cloneElement } from 'react';
+import type { ReactElement } from 'react';
 import type { AnnouncementItem, AuthUser, ChatSession, QuickAccessItem, UsageTipItem } from '../../types/domain';
 import { SidebarPanel } from '../../modules/chat/components/SidebarPanel';
 import { WidgetPanel } from '../../modules/chat/components/WidgetPanel';

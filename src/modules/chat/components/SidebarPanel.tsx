@@ -1,5 +1,6 @@
-import { History, LogOut, MessageSquare, Plus, UserCircle2, X } from 'lucide-react';
-import type { AuthUser, ChatSession } from '../../../types/domain';
+import { History, LogOut, Plus, UserCircle2, X } from 'lucide-react';
+import type { ChatSession } from '../../../types/domain';
+import type { AuthUser } from '../../auth/types/authTypes';
 import { Button } from '../../../components/atoms/Button';
 
 interface SidebarPanelProps {
@@ -80,8 +81,9 @@ export function SidebarPanel({
       <div className="mt-auto flex items-center gap-2 rounded-xl border border-slate-800 bg-slate-950/70 p-3">
         <UserCircle2 size={24} className="text-indigo-300" />
         <div className="min-w-0">
-          <p className="truncate text-sm text-slate-200">{user?.name ?? 'Mahasiswa'}</p>
-          <p className="truncate text-xs text-slate-500">{user?.studyProgram ?? '-'}</p>
+          <p className="truncate text-sm text-slate-200">{user?.full_name ?? 'Mahasiswa'}</p>
+          <p className="truncate text-xs text-slate-500">{user?.username ?? '-'}</p>
+          <p className="truncate text-xs text-slate-500">{user?.nama_prodi ?? '-'}</p>
         </div>
       </div>
       <Button variant="ghost" fullWidth className="mt-2" onClick={onLogout}>

@@ -12,7 +12,12 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as VerifyOtpRouteImport } from './routes/verify-otp'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as AuthenticatedUserRouteImport } from './routes/_authenticated/_user'
+import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
 import { Route as AuthenticatedUserIndexRouteImport } from './routes/_authenticated/_user/index'
+import { Route as AuthenticatedAdminProdiRouteImport } from './routes/_authenticated/admin/prodi'
 
 const VerifyOtpRoute = VerifyOtpRouteImport.update({
   id: '/verify-otp',
@@ -29,49 +34,94 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedUserIndexRoute = AuthenticatedUserIndexRouteImport.update({
-  id: '/_authenticated/_user/',
-  path: '/',
+const AuthenticatedRoute = AuthenticatedRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedUserRoute = AuthenticatedUserRouteImport.update({
+  id: '/_user',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthenticatedAdminRoute,
+} as any)
+const AuthenticatedUserIndexRoute = AuthenticatedUserIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthenticatedUserRoute,
+} as any)
+const AuthenticatedAdminProdiRoute = AuthenticatedAdminProdiRouteImport.update({
+  id: '/prodi',
+  path: '/prodi',
+  getParentRoute: () => AuthenticatedAdminRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
+  '/': typeof AuthenticatedUserIndexRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/verify-otp': typeof VerifyOtpRoute
-  '/': typeof AuthenticatedUserIndexRoute
+  '/admin': typeof AuthenticatedAdminRouteWithChildren
+  '/admin/prodi': typeof AuthenticatedAdminProdiRoute
+  '/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesByTo {
+  '/': typeof AuthenticatedUserIndexRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/verify-otp': typeof VerifyOtpRoute
-  '/': typeof AuthenticatedUserIndexRoute
+  '/admin/prodi': typeof AuthenticatedAdminProdiRoute
+  '/admin': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
+  '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/verify-otp': typeof VerifyOtpRoute
+  '/_authenticated/_user': typeof AuthenticatedUserRouteWithChildren
+  '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
+  '/_authenticated/admin/prodi': typeof AuthenticatedAdminProdiRoute
   '/_authenticated/_user/': typeof AuthenticatedUserIndexRoute
+  '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/login' | '/register' | '/verify-otp' | '/'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/login' | '/register' | '/verify-otp' | '/'
-  id:
-    | '__root__'
+  fullPaths:
+    | '/'
     | '/login'
     | '/register'
     | '/verify-otp'
+    | '/admin'
+    | '/admin/prodi'
+    | '/admin/'
+  fileRoutesByTo: FileRoutesByTo
+  to: '/' | '/login' | '/register' | '/verify-otp' | '/admin/prodi' | '/admin'
+  id:
+    | '__root__'
+    | '/_authenticated'
+    | '/login'
+    | '/register'
+    | '/verify-otp'
+    | '/_authenticated/_user'
+    | '/_authenticated/admin'
+    | '/_authenticated/admin/prodi'
     | '/_authenticated/_user/'
+    | '/_authenticated/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
+  AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
   LoginRoute: typeof LoginRoute
   RegisterRoute: typeof RegisterRoute
   VerifyOtpRoute: typeof VerifyOtpRoute
-  AuthenticatedUserIndexRoute: typeof AuthenticatedUserIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -97,21 +147,94 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/_user': {
+      id: '/_authenticated/_user'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedUserRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/admin/': {
+      id: '/_authenticated/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
     '/_authenticated/_user/': {
       id: '/_authenticated/_user/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof AuthenticatedUserIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AuthenticatedUserRoute
+    }
+    '/_authenticated/admin/prodi': {
+      id: '/_authenticated/admin/prodi'
+      path: '/prodi'
+      fullPath: '/admin/prodi'
+      preLoaderRoute: typeof AuthenticatedAdminProdiRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
     }
   }
 }
 
+interface AuthenticatedUserRouteChildren {
+  AuthenticatedUserIndexRoute: typeof AuthenticatedUserIndexRoute
+}
+
+const AuthenticatedUserRouteChildren: AuthenticatedUserRouteChildren = {
+  AuthenticatedUserIndexRoute: AuthenticatedUserIndexRoute,
+}
+
+const AuthenticatedUserRouteWithChildren =
+  AuthenticatedUserRoute._addFileChildren(AuthenticatedUserRouteChildren)
+
+interface AuthenticatedAdminRouteChildren {
+  AuthenticatedAdminProdiRoute: typeof AuthenticatedAdminProdiRoute
+  AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+}
+
+const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
+  AuthenticatedAdminProdiRoute: AuthenticatedAdminProdiRoute,
+  AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+}
+
+const AuthenticatedAdminRouteWithChildren =
+  AuthenticatedAdminRoute._addFileChildren(AuthenticatedAdminRouteChildren)
+
+interface AuthenticatedRouteChildren {
+  AuthenticatedUserRoute: typeof AuthenticatedUserRouteWithChildren
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRouteWithChildren
+}
+
+const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
+  AuthenticatedUserRoute: AuthenticatedUserRouteWithChildren,
+  AuthenticatedAdminRoute: AuthenticatedAdminRouteWithChildren,
+}
+
+const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
+  AuthenticatedRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
+  AuthenticatedRoute: AuthenticatedRouteWithChildren,
   LoginRoute: LoginRoute,
   RegisterRoute: RegisterRoute,
   VerifyOtpRoute: VerifyOtpRoute,
-  AuthenticatedUserIndexRoute: AuthenticatedUserIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

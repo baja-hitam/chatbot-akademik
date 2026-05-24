@@ -1,10 +1,12 @@
 import { Bot, Mail, Lock, User } from 'lucide-react';
 import { Button } from '../../../components/atoms/Button';
-import { Link } from '@tanstack/react-router';
-import { useForm } from 'react-hook-form';
+import { Link, useNavigate } from '@tanstack/react-router';
+import { useForm, Controller } from 'react-hook-form';
+import { useQuery } from '@tanstack/react-query';
 import { useRegisterMutation } from '../hooks/useRegisterMutation';
 import type { RegisterPayload } from '../types/authTypes';
-import { useNavigate } from '@tanstack/react-router';
+import { getProdisUtils } from '../../admin/prodi/services/prodiService';
+import { SelectSearch } from '../../../components/molecules/SelectSearch';
 
 
 export function RegisterForm() {
@@ -14,14 +16,24 @@ export function RegisterForm() {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm<RegisterPayload>({
     defaultValues: {
       username: '',
+      full_name: '',
       email: '',
       password: '',
+      kd_prodi: undefined,
+      role: 'student'
     },
   });
+
+  const { data: prodiOptions } = useQuery({
+    queryKey: ['prodi-utils'],
+    queryFn: getProdisUtils,
+  });
+
 
   const onSubmit = (data: RegisterPayload) => {
     // Implementation for form submission
@@ -73,20 +85,49 @@ export function RegisterForm() {
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               <label className="block space-y-2">
-                <span className="text-sm text-slate-300">Username / Nama Lengkap</span>
+                <span className="text-sm text-slate-300">NIM/NIP</span>
+                <span className="flex items-center rounded-xl border border-slate-700 bg-slate-950 px-3 focus-within:border-indigo-400">
+                  <User size={16} className="text-slate-500" />
+                  <Controller
+                    name="username"
+                    control={control}
+                    rules={{
+                      required: 'NIM/NIP wajib diisi.',
+                    }}
+                    render={({ field }) => (
+                      <input
+                        type="text"
+                        value={field.value}
+                        onChange={(e)=>{
+                          const value = e.target.value;
+                          if(value.match(/^[0-9]*$/)){
+                            field.onChange(value);
+                          } 
+                        }}
+                        className="w-full bg-transparent px-3 py-3 text-sm outline-none placeholder:text-slate-500"
+                        placeholder="Contoh: 12345678"
+                      />
+                    )}
+                  />
+                </span>
+                {errors.username ? <span className="text-xs text-rose-300">{errors.username.message}</span> : null}
+              </label>
+
+              <label className="block space-y-2">
+                <span className="text-sm text-slate-300">Nama Lengkap</span>
                 <span className="flex items-center rounded-xl border border-slate-700 bg-slate-950 px-3 focus-within:border-indigo-400">
                   <User size={16} className="text-slate-500" />
                   <input
                     type="text"
-                    {...register('username',{
-                      required: 'Username wajib diisi.',
+                    {...register('full_name',{
+                      required: 'Nama lengkap wajib diisi.',
                     })}
                     className="w-full bg-transparent px-3 py-3 text-sm outline-none placeholder:text-slate-500"
                     placeholder="Contoh: Budi Santoso"
                     required
                   />
                 </span>
-                {errors.username ? <span className="text-xs text-rose-300">{errors.username.message}</span> : null}
+                {errors.full_name ? <span className="text-xs text-rose-300">{errors.full_name.message}</span> : null}
               </label>
 
               <label className="block space-y-2">
@@ -109,6 +150,28 @@ export function RegisterForm() {
                   />
                 </span>
                 {errors.email ? <span className="text-xs text-rose-300">{errors.email.message}</span> : null}
+              </label>
+
+              <label className="block space-y-2">
+                <span className="text-sm text-slate-300">Program Studi</span>
+                <Controller
+                  name="kd_prodi"
+                  control={control}
+                  rules={{
+                    required: 'Prodi wajib diisi.',
+                  }}
+                  render={({ field }) => (
+                    <SelectSearch
+                      options={prodiOptions ?? []}
+                      value={field.value}
+                      onChange={field.onChange}
+                      placeholder="Pilih program studi"
+                      searchPlaceholder="Cari prodi..."
+                      className="w-full"
+                    />
+                  )}
+                />
+                {errors.kd_prodi ? <span className="text-xs text-rose-300">{errors.kd_prodi.message}</span> : null}
               </label>
 
               <label className="block space-y-2">

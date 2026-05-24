@@ -27,10 +27,12 @@ export async function login(payload: LoginPayload): Promise<AuthUser> {
 
     if (tokenData.responseBody.is_verified === false) {
       return {
-        name: tokenData.responseBody.user.username,
-        studyProgram: 'User', // Fallback as the backend doesn't provide this yet
+        username: tokenData.responseBody.user.username,
+        nama_prodi: tokenData.responseBody.user.nama_prodi || '', 
         email: tokenData.responseBody.user.email,
+        full_name: tokenData.responseBody.user.full_name,
         is_verified: false,
+        role: tokenData.responseBody.user.role,
       }
     }
 
@@ -41,9 +43,11 @@ export async function login(payload: LoginPayload): Promise<AuthUser> {
     localStorage.setItem(AUTH_TOKEN_KEY, tokenData.responseBody.access_token);
 
     const authUser: AuthUser = {
-      name: tokenData.responseBody.user.username,
-      studyProgram: 'User', // Fallback as the backend doesn't provide this yet
+      username: tokenData.responseBody.user.username,
+      nama_prodi: tokenData.responseBody.user.nama_prodi || '', 
       email: tokenData.responseBody.user.email,
+      full_name: tokenData.responseBody.user.full_name,
+      role: tokenData.responseBody.user.role,
     };
 
     localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(authUser));
@@ -82,9 +86,11 @@ export async function verifyOtpAndLogin(payload: VerifyOtpPayload): Promise<Auth
     localStorage.setItem(AUTH_TOKEN_KEY, data.responseBody.access_token);
 
     const authUser: AuthUser = {
-      name: data.responseBody.user.username,
-      studyProgram: 'User',
+      username: data.responseBody.user.username,
+      nama_prodi: data.responseBody.user.nama_prodi || '',
+      full_name: data.responseBody.user.full_name,
       email: data.responseBody.user.email,
+      role: data.responseBody.user.role,
     };
 
     localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(authUser));

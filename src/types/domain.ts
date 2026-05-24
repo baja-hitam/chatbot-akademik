@@ -63,4 +63,5 @@ export interface AuthUser {
   name: string;
   studyProgram: string;
   email: string;
+  role?: string;
 }
