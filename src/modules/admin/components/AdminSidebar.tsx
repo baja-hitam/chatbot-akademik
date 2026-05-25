@@ -75,7 +75,7 @@ export function AdminSidebar({
         <div className="mb-4 flex items-center gap-3 rounded-xl border border-slate-800 bg-slate-950/70 p-3">
           <UserCircle2 size={24} className="text-indigo-300" />
           <div className="min-w-0">
-            <p className="truncate text-sm text-slate-200">{user?.name ?? 'Admin'}</p>
+            <p className="truncate text-sm text-slate-200">{user?.full_name ?? 'Admin'}</p>
             <p className="truncate text-xs text-slate-500">{user?.role ?? 'admin'}</p>
           </div>
         </div>

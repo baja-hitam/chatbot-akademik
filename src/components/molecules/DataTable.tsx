@@ -1,6 +1,6 @@
 'use no memo';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   type ColumnDef,
   type Column,

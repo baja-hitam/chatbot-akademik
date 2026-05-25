@@ -60,8 +60,10 @@ export interface ChatReply {
 }
 
 export interface AuthUser {
-  name: string;
-  studyProgram: string;
+  username: string;
+  nama_prodi: string;
+  full_name: string;
   email: string;
+  is_verified?: boolean;
   role?: string;
 }
