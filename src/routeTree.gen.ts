@@ -19,6 +19,7 @@ import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authentic
 import { Route as AuthenticatedUserIndexRouteImport } from './routes/_authenticated/_user/index'
 import { Route as AuthenticatedAdminUsersRouteImport } from './routes/_authenticated/admin/users'
 import { Route as AuthenticatedAdminProdiRouteImport } from './routes/_authenticated/admin/prodi'
+import { Route as AuthenticatedAdminKnowledgeBaseRouteImport } from './routes/_authenticated/admin/knowledge-base'
 
 const VerifyOtpRoute = VerifyOtpRouteImport.update({
   id: '/verify-otp',
@@ -68,6 +69,12 @@ const AuthenticatedAdminProdiRoute = AuthenticatedAdminProdiRouteImport.update({
   path: '/prodi',
   getParentRoute: () => AuthenticatedAdminRoute,
 } as any)
+const AuthenticatedAdminKnowledgeBaseRoute =
+  AuthenticatedAdminKnowledgeBaseRouteImport.update({
+    id: '/knowledge-base',
+    path: '/knowledge-base',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedUserIndexRoute
@@ -75,6 +82,7 @@ export interface FileRoutesByFullPath {
   '/register': typeof RegisterRoute
   '/verify-otp': typeof VerifyOtpRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
+  '/admin/knowledge-base': typeof AuthenticatedAdminKnowledgeBaseRoute
   '/admin/prodi': typeof AuthenticatedAdminProdiRoute
   '/admin/users': typeof AuthenticatedAdminUsersRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
@@ -84,6 +92,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/verify-otp': typeof VerifyOtpRoute
+  '/admin/knowledge-base': typeof AuthenticatedAdminKnowledgeBaseRoute
   '/admin/prodi': typeof AuthenticatedAdminProdiRoute
   '/admin/users': typeof AuthenticatedAdminUsersRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
@@ -96,6 +105,7 @@ export interface FileRoutesById {
   '/verify-otp': typeof VerifyOtpRoute
   '/_authenticated/_user': typeof AuthenticatedUserRouteWithChildren
   '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
+  '/_authenticated/admin/knowledge-base': typeof AuthenticatedAdminKnowledgeBaseRoute
   '/_authenticated/admin/prodi': typeof AuthenticatedAdminProdiRoute
   '/_authenticated/admin/users': typeof AuthenticatedAdminUsersRoute
   '/_authenticated/_user/': typeof AuthenticatedUserIndexRoute
@@ -109,6 +119,7 @@ export interface FileRouteTypes {
     | '/register'
     | '/verify-otp'
     | '/admin'
+    | '/admin/knowledge-base'
     | '/admin/prodi'
     | '/admin/users'
     | '/admin/'
@@ -118,6 +129,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/register'
     | '/verify-otp'
+    | '/admin/knowledge-base'
     | '/admin/prodi'
     | '/admin/users'
     | '/admin'
@@ -129,6 +141,7 @@ export interface FileRouteTypes {
     | '/verify-otp'
     | '/_authenticated/_user'
     | '/_authenticated/admin'
+    | '/_authenticated/admin/knowledge-base'
     | '/_authenticated/admin/prodi'
     | '/_authenticated/admin/users'
     | '/_authenticated/_user/'
@@ -214,6 +227,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminProdiRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
+    '/_authenticated/admin/knowledge-base': {
+      id: '/_authenticated/admin/knowledge-base'
+      path: '/knowledge-base'
+      fullPath: '/admin/knowledge-base'
+      preLoaderRoute: typeof AuthenticatedAdminKnowledgeBaseRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
   }
 }
 
@@ -229,12 +249,14 @@ const AuthenticatedUserRouteWithChildren =
   AuthenticatedUserRoute._addFileChildren(AuthenticatedUserRouteChildren)
 
 interface AuthenticatedAdminRouteChildren {
+  AuthenticatedAdminKnowledgeBaseRoute: typeof AuthenticatedAdminKnowledgeBaseRoute
   AuthenticatedAdminProdiRoute: typeof AuthenticatedAdminProdiRoute
   AuthenticatedAdminUsersRoute: typeof AuthenticatedAdminUsersRoute
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
 }
 
 const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
+  AuthenticatedAdminKnowledgeBaseRoute: AuthenticatedAdminKnowledgeBaseRoute,
   AuthenticatedAdminProdiRoute: AuthenticatedAdminProdiRoute,
   AuthenticatedAdminUsersRoute: AuthenticatedAdminUsersRoute,
   AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,

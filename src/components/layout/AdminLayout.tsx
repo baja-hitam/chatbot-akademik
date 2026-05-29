@@ -2,6 +2,7 @@ import { useState, isValidElement, cloneElement } from 'react';
 import type { ReactElement } from 'react';
 import type { AuthUser } from '../../types/domain';
 import { AdminSidebar } from '../../modules/admin/components/AdminSidebar';
+import { Menu, LayoutDashboard } from 'lucide-react';
 
 interface AdminLayoutProps {
   user: AuthUser | null;
@@ -21,17 +22,17 @@ export function AdminLayout({
   };
 
   return (
-    <main className="h-dvh bg-slate-950 text-slate-100">
+    <main className="h-dvh bg-slate-950 text-slate-100 flex flex-col overflow-hidden">
       {isSidebarOpen && (
         <button
           type="button"
           aria-label="Tutup panel"
           onClick={closePanels}
-          className="fixed inset-0 z-30 bg-slate-950/60 xl:hidden"
+          className="fixed inset-0 z-30 bg-slate-950/60 lg:hidden cursor-default"
         />
       )}
 
-      <div className="mx-auto flex h-full max-w-[1800px]">
+      <div className="mx-auto flex h-full w-full max-w-[1800px] overflow-hidden">
         <AdminSidebar
           isOpen={isSidebarOpen}
           user={user}
@@ -40,11 +41,31 @@ export function AdminLayout({
         />
 
         <div className="flex min-w-0 flex-1 flex-col overflow-y-auto bg-slate-900/50">
-          {isValidElement(children)
-            ? cloneElement(children as ReactElement<{ onOpenSidebar: () => void; }>, {
-                onOpenSidebar: () => setIsSidebarOpen(true),
-              })
-            : children}
+          {/* Mobile Header */}
+          <div className="sticky top-0 z-20 flex items-center justify-between border-b border-slate-800 bg-slate-950 p-4 lg:hidden">
+            <div className="flex items-center gap-3">
+              <div className="grid h-8 w-8 place-items-center rounded-lg bg-indigo-500 text-white">
+                <LayoutDashboard size={18} />
+              </div>
+              <p className="text-sm font-semibold tracking-wide text-slate-200">Admin Panel</p>
+            </div>
+            <button
+              type="button"
+              onClick={() => setIsSidebarOpen(true)}
+              className="rounded-md p-2 text-slate-300 hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              aria-label="Buka menu"
+            >
+              <Menu size={20} />
+            </button>
+          </div>
+
+          <div className="flex-1">
+            {isValidElement(children)
+              ? cloneElement(children as ReactElement<{ onOpenSidebar: () => void; }>, {
+                  onOpenSidebar: () => setIsSidebarOpen(true),
+                })
+              : children}
+          </div>
         </div>
       </div>
     </main>

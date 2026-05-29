@@ -5,7 +5,7 @@ export const Route = createFileRoute('/_authenticated/_user')({
     if (!context.auth.isAuthenticated) {
       throw redirect({ to: '/login' });
     }
-    if (context.auth.user?.role === 'admin') {
+    if (context.auth.user?.role === 'admin' || context.auth.user?.role === 'prodi') {
       throw redirect({ to: '/admin' });
     }
   },

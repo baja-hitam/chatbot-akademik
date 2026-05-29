@@ -58,7 +58,7 @@ export function RegisterForm() {
               Chatbot Akademik
             </div>
             <h1 className="mt-5 text-3xl font-semibold leading-tight text-white">
-              Bergabung dengan asisten akademik kampus.
+              Bergabung dengan asisten akademik Fakultas Teknologi Informasi.
             </h1>
             <p className="mt-4 text-sm leading-6 text-slate-300">
               Daftarkan diri Anda untuk mulai menanyakan info akademik seputar jadwal, KRS, tugas akhir, dan masih banyak lagi.
@@ -85,14 +85,14 @@ export function RegisterForm() {
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               <label className="block space-y-2">
-                <span className="text-sm text-slate-300">NIM/NIP</span>
+                <span className="text-sm text-slate-300">NIM</span>
                 <span className="flex items-center rounded-xl border border-slate-700 bg-slate-950 px-3 focus-within:border-indigo-400">
                   <User size={16} className="text-slate-500" />
                   <Controller
                     name="username"
                     control={control}
                     rules={{
-                      required: 'NIM/NIP wajib diisi.',
+                      required: 'NIM wajib diisi.',
                     }}
                     render={({ field }) => (
                       <input

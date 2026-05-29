@@ -1,4 +1,4 @@
-import { BookOpen, LayoutDashboard, LogOut, UserCircle2, X, Users } from 'lucide-react';
+import { BookOpen, LayoutDashboard, LogOut, UserCircle2, X, Users, Database } from 'lucide-react';
 import type { AuthUser } from '../../../types/domain';
 import { Button } from '../../../components/atoms/Button';
 import { Link } from '@tanstack/react-router';
@@ -52,6 +52,15 @@ export function AdminSidebar({
           Dashboard
         </Link>
         <Link
+          to="/admin/knowledge-base"
+          className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-slate-800 hover:text-white"
+          activeProps={{ className: 'bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500/20' }}
+          onClick={onClose}
+        >
+          <Database size={18} />
+          Knowledge Base
+        </Link>
+        <Link
           to="/admin/prodi"
           className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors hover:bg-slate-800 hover:text-white"
           activeProps={{ className: 'bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500/20' }}
@@ -76,7 +85,8 @@ export function AdminSidebar({
           <UserCircle2 size={24} className="text-indigo-300" />
           <div className="min-w-0">
             <p className="truncate text-sm text-slate-200">{user?.full_name ?? 'Admin'}</p>
-            <p className="truncate text-xs text-slate-500">{user?.role ?? 'admin'}</p>
+            <p className="truncate text-xs text-slate-500">{user?.username ?? 'N/A'}</p>
+            <p className="truncate text-xs text-slate-500">{user?.nama_prodi ?? 'N/A'}</p>
           </div>
         </div>
         <Button variant="ghost" fullWidth onClick={onLogout}>

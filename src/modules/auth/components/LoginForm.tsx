@@ -62,15 +62,12 @@ export function LoginForm() {
               Chatbot Akademik
             </div>
             <h1 className="mt-5 text-3xl font-semibold leading-tight text-white">
-              Asisten akademik kampus dalam satu dashboard.
+              Asisten akademik Fakultas Teknologi Informasi.
             </h1>
             <p className="mt-4 text-sm leading-6 text-slate-300">
-              Tanyakan KRS, KKP, Tugas Akhir, dan pengumuman terbaru dengan tampilan yang cepat dan rapi.
+              Tanyakan KRS, KKP, Tugas Akhir, dan informasi akademik lainnya.
             </p>
           </div>
-          <p className="text-xs text-slate-400">
-            Gunakan akun demo untuk login dan eksplorasi alur chatbot.
-          </p>
         </div>
 
         <div className="p-6 sm:p-10">
@@ -137,11 +134,6 @@ export function LoginForm() {
                 {loginMutation.isPending ? 'Memproses...' : 'Login'}
               </Button>
             </form>
-
-            <div className="mt-5 rounded-lg border border-slate-800 bg-slate-950/80 p-3 text-xs text-slate-400">
-              Akun demo: <span className="text-slate-200">{DEMO_CREDENTIALS.email}</span> /{' '}
-              <span className="text-slate-200">{DEMO_CREDENTIALS.password}</span>
-            </div>
 
             <div className="mt-5 text-center text-sm text-slate-400">
               Belum punya akun?{' '}
