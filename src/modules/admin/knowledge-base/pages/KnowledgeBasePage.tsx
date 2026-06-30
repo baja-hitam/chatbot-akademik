@@ -14,16 +14,12 @@ import { SelectSearch } from '../../../../components/molecules/SelectSearch';
 import { Badge } from '../../../../components/atoms/Badge';
 
 const DOCUMENT_CATEGORIES = [
-  { value: 'kurikulum', label: 'Kurikulum' },
-  { value: 'peraturan', label: 'Peraturan' },
-  { value: 'pedoman_penulisan_kkp', label: 'Pedoman Penulisan KKP' },
+  { value: 'buku_kurikulum', label: 'Buku Kurikulum' },
+  { value: 'kalender_akademik', label: 'Kalender Akademik' },
+  { value: 'pedoman_penulisan_ta_kkp', label: 'Pedoman Penulisan TA KKP' },
   { value: 'panduan_topik_kkp', label: 'Panduan Topik KKP' },
   { value: 'panduan_topik_ta', label: 'Panduan Topik TA' },
-  { value: 'jadwal', label: 'Jadwal' },
-  { value: 'informasi_umum', label: 'Informasi Umum' },
-  { value: 'beasiswa', label: 'Beasiswa' },
-  { value: 'akademik', label: 'Akademik' },
-  { value: 'kemahasiswaan', label: 'Kemahasiswaan' },
+  { value: 'panduan_krs', label: 'Panduan KRS' },
   { value: 'lainnya', label: 'Lainnya' },
 ];
 
