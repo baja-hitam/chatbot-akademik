@@ -33,7 +33,7 @@ export function Modal({ isOpen, onClose, title, children }: ModalProps) {
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
       {/* Backdrop */}
       <div 
-        className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm transition-opacity"
+        className="fixed inset-0 bg-white dark:bg-slate-950 backdrop-blur-sm transition-opacity"
         onClick={onClose}
         aria-hidden="true"
       />
@@ -41,18 +41,18 @@ export function Modal({ isOpen, onClose, title, children }: ModalProps) {
       {/* Modal Panel */}
       <div 
         ref={modalRef}
-        className="relative flex w-full max-w-md flex-col transform overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 shadow-2xl transition-all max-h-[90vh]"
+        className="relative flex w-full max-w-md flex-col transform overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 shadow-2xl transition-all max-h-[90vh]"
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-headline"
       >
-        <div className="flex items-center justify-between border-b border-slate-800 px-6 py-4">
-          <h3 className="text-lg font-semibold text-slate-100" id="modal-headline">
+        <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 px-6 py-4">
+          <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100" id="modal-headline">
             {title}
           </h3>
           <button
             onClick={onClose}
-            className="rounded-lg p-1 text-slate-400 hover:bg-slate-800 hover:text-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors"
+            className="rounded-lg p-1 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 hover:text-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors"
           >
             <span className="sr-only">Tutup</span>
             <X size={20} />

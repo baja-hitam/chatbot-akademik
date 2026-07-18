@@ -7,6 +7,7 @@ import { useRegisterMutation } from '../hooks/useRegisterMutation';
 import type { RegisterPayload } from '../types/authTypes';
 import { getProdisUtils } from '../../admin/prodi/services/prodiService';
 import { SelectSearch } from '../../../components/molecules/SelectSearch';
+import { ThemeToggle } from '../../../components/molecules/ThemeToggle';
 
 
 export function RegisterForm() {
@@ -49,22 +50,25 @@ export function RegisterForm() {
   };
 
   return (
-    <main className="flex min-h-dvh items-center justify-center bg-slate-950 px-4 py-8 text-slate-100">
-      <section className="grid w-full max-w-5xl overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/60 shadow-2xl shadow-slate-950/40 lg:grid-cols-2">
-        <div className="hidden flex-col justify-between border-r border-slate-800 bg-gradient-to-b from-indigo-500/20 to-slate-900 p-10 lg:flex">
+    <main className="relative flex min-h-dvh items-center justify-center bg-white dark:bg-slate-950 px-4 py-8 text-slate-900 dark:text-slate-100">
+      <div className="absolute top-4 right-4">
+        <ThemeToggle />
+      </div>
+      <section className="grid w-full max-w-5xl overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 shadow-2xl shadow-slate-200 dark:shadow-slate-950/40 lg:grid-cols-2">
+        <div className="hidden flex-col justify-between border-r border-slate-200 dark:border-slate-800 bg-linear-to-b from-indigo-500/10 dark:from-indigo-500/20 to-slate-50 dark:to-slate-900 p-10 lg:flex">
           <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-indigo-300/30 bg-indigo-500/20 px-3 py-1 text-xs text-indigo-100">
+            <div className="inline-flex items-center gap-2 rounded-full border border-indigo-200 dark:border-indigo-300/30 bg-indigo-50 dark:bg-indigo-500/20 px-3 py-1 text-xs text-indigo-700 dark:text-indigo-100">
               <Bot size={14} />
               Chatbot Akademik
             </div>
-            <h1 className="mt-5 text-3xl font-semibold leading-tight text-white">
+            <h1 className="mt-5 text-3xl font-semibold leading-tight text-slate-900 dark:text-white">
               Bergabung dengan asisten akademik Fakultas Teknologi Informasi.
             </h1>
-            <p className="mt-4 text-sm leading-6 text-slate-300">
+            <p className="mt-4 text-sm leading-6 text-slate-700 dark:text-slate-300">
               Daftarkan diri Anda untuk mulai menanyakan info akademik seputar jadwal, KRS, tugas akhir, dan masih banyak lagi.
             </p>
           </div>
-          <p className="text-xs text-slate-400">
+          <p className="text-xs text-slate-600 dark:text-slate-400">
             Akses ke sistem membutuhkan verifikasi email (OTP) setelah registrasi.
           </p>
         </div>
@@ -72,21 +76,21 @@ export function RegisterForm() {
         <div className="p-6 sm:p-10">
           <div className="mx-auto w-full max-w-md">
             <div className="mb-8 lg:hidden">
-              <div className="inline-flex items-center gap-2 rounded-full border border-indigo-300/30 bg-indigo-500/20 px-3 py-1 text-xs text-indigo-100">
+              <div className="inline-flex items-center gap-2 rounded-full border border-indigo-200 dark:border-indigo-300/30 bg-indigo-50 dark:bg-indigo-500/20 px-3 py-1 text-xs text-indigo-700 dark:text-indigo-100">
                 <Bot size={14} />
                 Chatbot Akademik
               </div>
-              <h1 className="mt-4 text-2xl font-semibold text-white">Buat akun baru</h1>
+              <h1 className="mt-4 text-2xl font-semibold text-slate-900 dark:text-white">Buat akun baru</h1>
             </div>
 
             <div className="hidden lg:block mb-8">
-              <h1 className="text-2xl font-semibold text-white">Buat akun baru</h1>
+              <h1 className="text-2xl font-semibold text-slate-900 dark:text-white">Buat akun baru</h1>
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               <label className="block space-y-2">
-                <span className="text-sm text-slate-300">NIM</span>
-                <span className="flex items-center rounded-xl border border-slate-700 bg-slate-950 px-3 focus-within:border-indigo-400">
+                <span className="text-sm text-slate-700 dark:text-slate-300">NIM</span>
+                <span className="flex items-center rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 focus-within:border-indigo-400">
                   <User size={16} className="text-slate-500" />
                   <Controller
                     name="username"
@@ -110,12 +114,12 @@ export function RegisterForm() {
                     )}
                   />
                 </span>
-                {errors.username ? <span className="text-xs text-rose-300">{errors.username.message}</span> : null}
+                {errors.username ? <span className="text-xs text-rose-500 dark:text-rose-300">{errors.username.message}</span> : null}
               </label>
 
               <label className="block space-y-2">
-                <span className="text-sm text-slate-300">Nama Lengkap</span>
-                <span className="flex items-center rounded-xl border border-slate-700 bg-slate-950 px-3 focus-within:border-indigo-400">
+                <span className="text-sm text-slate-700 dark:text-slate-300">Nama Lengkap</span>
+                <span className="flex items-center rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 focus-within:border-indigo-400">
                   <User size={16} className="text-slate-500" />
                   <input
                     type="text"
@@ -127,12 +131,12 @@ export function RegisterForm() {
                     required
                   />
                 </span>
-                {errors.full_name ? <span className="text-xs text-rose-300">{errors.full_name.message}</span> : null}
+                {errors.full_name ? <span className="text-xs text-rose-500 dark:text-rose-300">{errors.full_name.message}</span> : null}
               </label>
 
               <label className="block space-y-2">
-                <span className="text-sm text-slate-300">Email</span>
-                <span className="flex items-center rounded-xl border border-slate-700 bg-slate-950 px-3 focus-within:border-indigo-400">
+                <span className="text-sm text-slate-700 dark:text-slate-300">Email</span>
+                <span className="flex items-center rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 focus-within:border-indigo-400">
                   <Mail size={16} className="text-slate-500" />
                   <input
                     type="email"
@@ -149,11 +153,11 @@ export function RegisterForm() {
                     required
                   />
                 </span>
-                {errors.email ? <span className="text-xs text-rose-300">{errors.email.message}</span> : null}
+                {errors.email ? <span className="text-xs text-rose-500 dark:text-rose-300">{errors.email.message}</span> : null}
               </label>
 
               <label className="block space-y-2">
-                <span className="text-sm text-slate-300">Program Studi</span>
+                <span className="text-sm text-slate-700 dark:text-slate-300">Program Studi</span>
                 <Controller
                   name="kd_prodi"
                   control={control}
@@ -171,12 +175,12 @@ export function RegisterForm() {
                     />
                   )}
                 />
-                {errors.kd_prodi ? <span className="text-xs text-rose-300">{errors.kd_prodi.message}</span> : null}
+                {errors.kd_prodi ? <span className="text-xs text-rose-500 dark:text-rose-300">{errors.kd_prodi.message}</span> : null}
               </label>
 
               <label className="block space-y-2">
-                <span className="text-sm text-slate-300">Password</span>
-                <span className="flex items-center rounded-xl border border-slate-700 bg-slate-950 px-3 focus-within:border-indigo-400">
+                <span className="text-sm text-slate-700 dark:text-slate-300">Password</span>
+                <span className="flex items-center rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 focus-within:border-indigo-400">
                   <Lock size={16} className="text-slate-500" />
                   <input
                     type="password"
@@ -193,11 +197,11 @@ export function RegisterForm() {
                     required
                   />
                 </span>
-                {errors.password ? <span className="text-xs text-rose-300">{errors.password.message}</span> : null}
+                {errors.password ? <span className="text-xs text-rose-500 dark:text-rose-300">{errors.password.message}</span> : null}
               </label>
 
               {registerMutation.isError && (
-                <p className="rounded-lg border border-rose-500/40 bg-rose-500/10 px-3 py-2 text-sm text-rose-200">
+                <p className="rounded-lg border border-rose-200 bg-rose-50 text-rose-600 dark:border-rose-500/40 dark:bg-rose-500/10 px-3 py-2 text-sm dark:text-rose-200">
                   {registerMutation.error.message}
                 </p>
               )}
@@ -207,7 +211,7 @@ export function RegisterForm() {
               </Button>
             </form>
 
-            <div className="mt-5 text-center text-sm text-slate-400">
+            <div className="mt-5 text-center text-sm text-slate-600 dark:text-slate-400">
               Sudah punya akun?{' '}
               <Link to="/login" className="text-indigo-400 hover:text-indigo-300 hover:underline">
                 Masuk di sini

@@ -19,11 +19,11 @@ export function ChatBubble({ message }: ChatBubbleProps) {
       <div
         className={[
           'max-w-[85%] rounded-2xl px-4 py-3 text-sm shadow-sm',
-          isAssistant ? 'bg-slate-800 text-slate-100' : 'bg-indigo-500 text-white',
+          isAssistant ? 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100' : 'bg-indigo-500 text-white',
         ].join(' ')}
       >
         {isAssistant ? (
-          <div className="space-y-2 leading-6 [&_ol]:list-decimal [&_ol]:pl-5 [&_ul]:list-disc [&_ul]:pl-5 [&_table]:w-full [&_table]:border-collapse [&_table]:mt-3 [&_table]:text-sm [&_th]:border [&_th]:border-slate-700 [&_th]:p-2 [&_th]:bg-slate-700/50 [&_td]:border [&_td]:border-slate-700 [&_td]:p-2 [&_th]:text-left">
+          <div className="space-y-2 leading-6 [&_ol]:list-decimal [&_ol]:pl-5 [&_ul]:list-disc [&_ul]:pl-5 [&_table]:w-full [&_table]:border-collapse [&_table]:mt-3 [&_table]:text-sm [&_th]:border [&_th]:border-slate-300 dark:border-slate-700 [&_th]:p-2 [&_th]:bg-slate-700/50 [&_td]:border [&_td]:border-slate-300 dark:border-slate-700 [&_td]:p-2 [&_th]:text-left">
             <ReactMarkdown remarkPlugins={[remarkGfm]}>{message.content}</ReactMarkdown>
           </div>
         ) : (

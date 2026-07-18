@@ -2,6 +2,7 @@ import { History, LogOut, Plus, UserCircle2, X } from 'lucide-react';
 import type { ChatSession } from '../../../types/domain';
 import type { AuthUser } from '../../auth/types/authTypes';
 import { Button } from '../../../components/atoms/Button';
+import { ThemeToggle } from '../../../components/molecules/ThemeToggle';
 
 interface SidebarPanelProps {
   isOpen: boolean;
@@ -27,16 +28,16 @@ export function SidebarPanel({
   return (
     <aside
       className={[
-        'fixed inset-y-0 left-0 z-40 flex h-full w-[280px] flex-col border-r border-slate-800 bg-slate-900 p-4 transition-transform duration-200 lg:static lg:z-auto',
+        'fixed inset-y-0 left-0 z-40 flex h-full w-[280px] flex-col border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 transition-transform duration-200 lg:static lg:z-auto',
         isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0',
       ].join(' ')}
     >
       <div className="mb-3 flex items-center justify-between">
-        <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Riwayat Chat</p>
+        <p className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Riwayat Chat</p>
         <button
           type="button"
           onClick={onClose}
-          className="rounded-md p-2 text-slate-300 hover:bg-slate-800 lg:hidden"
+          className="rounded-md p-2 text-slate-500 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 lg:hidden"
           aria-label="Tutup menu"
         >
           <X size={18} />
@@ -56,8 +57,8 @@ export function SidebarPanel({
               onClick={() => onSelectSession(session.id)}
               className={`flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm transition-colors ${
                 isActive 
-                  ? 'bg-indigo-500/20 text-indigo-100 border border-indigo-500/30' 
-                  : 'text-slate-300 hover:bg-slate-800 hover:text-slate-100 border border-transparent'
+                  ? 'bg-indigo-500/20 text-indigo-900 dark:text-indigo-100 border border-indigo-500/30' 
+                  : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-100 border border-transparent'
               }`}
             >
               {/* <MessageSquare size={16} className={isActive ? 'text-indigo-400' : 'text-slate-500'} /> */}
@@ -70,18 +71,21 @@ export function SidebarPanel({
         )}
       </nav>
 
-      <div className="mt-6 rounded-xl border border-slate-800 bg-slate-950/60 p-3 text-xs text-slate-400">
-        <div className="mb-1 flex items-center gap-2 text-slate-300">
+      <div className="mt-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/60 p-3 text-xs text-slate-600 dark:text-slate-400">
+        <div className="mb-1 flex items-center gap-2 text-slate-700 dark:text-slate-300">
           <History size={14} />
           Chat aktif
         </div>
         Fokus saat ini hanya kirim pertanyaan ke AI dengan parameter <code>question</code>.
       </div>
 
-      <div className="mt-auto flex items-center gap-2 rounded-xl border border-slate-800 bg-slate-950/70 p-3">
+      <div className="mt-auto pt-4 flex items-center justify-between">
+        <ThemeToggle />
+      </div>
+      <div className="mt-4 flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/70 p-3">
         <UserCircle2 size={24} className="text-indigo-300" />
         <div className="min-w-0">
-          <p className="truncate text-sm text-slate-200">{user?.full_name ?? 'Mahasiswa'}</p>
+          <p className="truncate text-sm text-slate-900 dark:text-slate-200">{user?.full_name ?? 'Mahasiswa'}</p>
           <p className="truncate text-xs text-slate-500">{user?.username ?? '-'}</p>
           <p className="truncate text-xs text-slate-500">{user?.nama_prodi ?? '-'}</p>
         </div>

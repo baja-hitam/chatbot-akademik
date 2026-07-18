@@ -5,6 +5,7 @@ import type { VerifyOtpPayload } from '../types/authTypes';
 import { useVerifyOtpMutation } from '../hooks/useVerifyOtpMutation';
 import { useAuth } from '../../../app/providers/authContext';
 import { useNavigate } from '@tanstack/react-router';
+import { ThemeToggle } from '../../../components/molecules/ThemeToggle';
 
 
 export function VerifyOtpForm({ email }: { email: string }) {
@@ -37,22 +38,25 @@ export function VerifyOtpForm({ email }: { email: string }) {
   };
 
   return (
-    <main className="flex min-h-dvh items-center justify-center bg-slate-950 px-4 py-8 text-slate-100">
-      <section className="w-full max-w-md overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/60 p-6 sm:p-10 shadow-2xl shadow-slate-950/40">
+    <main className="relative flex min-h-dvh items-center justify-center bg-white dark:bg-slate-950 px-4 py-8 text-slate-900 dark:text-slate-100">
+      <div className="absolute top-4 right-4">
+        <ThemeToggle />
+      </div>
+      <section className="w-full max-w-md overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 p-6 sm:p-10 shadow-2xl shadow-slate-950/40">
         <div className="mb-8 text-center">
-          <div className="mx-auto mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-indigo-500/20 text-indigo-400">
+          <div className="mx-auto mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-indigo-50 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400">
             <ShieldCheck size={24} />
           </div>
-          <h1 className="text-2xl font-semibold text-white">Verifikasi Email</h1>
-          <p className="mt-2 text-sm text-slate-400">
-            Kode verifikasi telah dikirim ke <strong className="text-slate-200">{email}</strong>
+          <h1 className="text-2xl font-semibold text-slate-900 dark:text-white">Verifikasi Email</h1>
+          <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
+            Kode verifikasi telah dikirim ke <strong className="text-slate-800 dark:text-slate-200">{email}</strong>
           </p>
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <label className="block space-y-2">
-            <span className="text-sm text-slate-300">Kode OTP</span>
-            <span className="flex items-center rounded-xl border border-slate-700 bg-slate-950 px-3 focus-within:border-indigo-400">
+            <span className="text-sm text-slate-700 dark:text-slate-300">Kode OTP</span>
+            <span className="flex items-center rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 focus-within:border-indigo-400">
               <KeyRound size={16} className="text-slate-500" />
               <input
                 type="text"
@@ -69,11 +73,11 @@ export function VerifyOtpForm({ email }: { email: string }) {
                 maxLength={6}
               />
             </span>
-            {errors.otp_code ? <span className="text-xs text-rose-300">{errors.otp_code.message}</span> : null}
+            {errors.otp_code ? <span className="text-xs text-rose-500 dark:text-rose-300">{errors.otp_code.message}</span> : null}
           </label>
 
           {verifyOtpMutation.error && (
-            <p className="rounded-lg border border-rose-500/40 bg-rose-500/10 px-3 py-2 text-sm text-rose-200 text-center">
+            <p className="rounded-lg border border-rose-200 bg-rose-50 text-rose-600 dark:border-rose-500/40 dark:bg-rose-500/10 px-3 py-2 text-sm dark:text-rose-200 text-center">
               {verifyOtpMutation.error.message}
             </p>
           )}

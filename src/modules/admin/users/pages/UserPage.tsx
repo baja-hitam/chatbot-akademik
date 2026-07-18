@@ -147,7 +147,7 @@ export function UserPage() {
         accessorKey: 'role',
         header: ({ column }) => <DataTableColumnHeader column={column} title="Role" />,
         cell: ({ row }) => (
-          <span className="capitalize px-2 py-1 bg-slate-800 rounded-md text-xs border border-slate-700 text-slate-300">
+          <span className="capitalize px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded-md text-xs border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300">
             {row.original.role}
           </span>
         ),
@@ -178,14 +178,14 @@ export function UserPage() {
           <div className="flex gap-2">
             <button
               onClick={() => handleEdit(row.original)}
-              className="p-2 rounded-lg text-indigo-400 hover:bg-slate-800 transition-colors"
+              className="p-2 rounded-lg text-indigo-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"
               title="Edit"
             >
               <Edit2 size={16} />
             </button>
             <button
               onClick={() => handleDelete(row.original.id)}
-              className="p-2 rounded-lg text-rose-400 hover:bg-slate-800 transition-colors"
+              className="p-2 rounded-lg text-rose-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"
               title="Hapus"
             >
               <Trash2 size={16} />
@@ -203,8 +203,8 @@ export function UserPage() {
     <div className="p-4 md:p-8">
       <div className="mb-8 flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-slate-100">Manajemen Pengguna</h1>
-          <p className="mt-1 text-sm text-slate-400">Kelola data pengguna sistem</p>
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100">Manajemen Pengguna</h1>
+          <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">Kelola data pengguna sistem</p>
         </div>
         <Button onClick={() => setIsFormOpen(true)} className="flex items-center gap-2">
           <Plus size={18} /> Tambah Pengguna
@@ -218,7 +218,7 @@ export function UserPage() {
       >
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div>
-            <label className="mb-2 block text-sm text-slate-300">NIM/NIP</label>
+            <label className="mb-2 block text-sm text-slate-700 dark:text-slate-300">NIM/NIP</label>
             <Controller
               name="username"
               control={control}
@@ -234,31 +234,31 @@ export function UserPage() {
                   }}
                   placeholder='Masukkan NIP/NIM...'
                   value={field.value || ''}
-                  className="w-full rounded-lg border border-slate-700 bg-slate-800 p-2.5 text-slate-200 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                  className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 p-2.5 text-slate-800 dark:text-slate-200 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
                 />
               )}
             />
             {errors.username && <span className="text-xs text-rose-400">{errors.username.message}</span>}
           </div>
           <div>
-            <label className="mb-2 block text-sm text-slate-300">Nama Lengkap</label>
+            <label className="mb-2 block text-sm text-slate-700 dark:text-slate-300">Nama Lengkap</label>
             <input
               type="text"
               placeholder='Masukkan Nama Lengkap...'
               {...register('full_name', { required: 'Nama Lengkap wajib diisi' })}
-              className="w-full rounded-lg border border-slate-700 bg-slate-800 p-2.5 text-slate-200 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 p-2.5 text-slate-800 dark:text-slate-200 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
             />
             {errors.full_name && <span className="text-xs text-rose-400">{errors.full_name.message}</span>}
           </div>
 
           {!editingUser && (
             <div>
-              <label className="mb-2 block text-sm text-slate-300">Email</label>
+              <label className="mb-2 block text-sm text-slate-700 dark:text-slate-300">Email</label>
               <input
                 type="email"
                 placeholder='Masukkan Email...'
                 {...register('email', { required: !editingUser ? 'Email wajib diisi' : false })}
-                className="w-full rounded-lg border border-slate-700 bg-slate-800 p-2.5 text-slate-200 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 disabled:opacity-50"
+                className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 p-2.5 text-slate-800 dark:text-slate-200 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 disabled:opacity-50"
               />
               {errors.email && <span className="text-xs text-rose-400">{errors.email.message}</span>}
             </div>
@@ -266,19 +266,19 @@ export function UserPage() {
           
           {!editingUser && (
             <div>
-              <label className="mb-2 block text-sm text-slate-300">Password</label>
+              <label className="mb-2 block text-sm text-slate-700 dark:text-slate-300">Password</label>
               <input
                 type="password"
                 placeholder='Masukkan Password...'
                 {...register('password', { required: 'Password wajib diisi' })}
-                className="w-full rounded-lg border border-slate-700 bg-slate-800 p-2.5 text-slate-200 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 p-2.5 text-slate-800 dark:text-slate-200 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
               />
               {errors.password && <span className="text-xs text-rose-400">{errors.password.message}</span>}
             </div>
           )}
 
           <div>
-            <label className="mb-2 block text-sm text-slate-300">Role</label>
+            <label className="mb-2 block text-sm text-slate-700 dark:text-slate-300">Role</label>
             <Controller
               name="role"
               control={control}
@@ -299,7 +299,7 @@ export function UserPage() {
 
           {requireProdi && (
             <div>
-              <label className="mb-2 block text-sm text-slate-300">Program Studi</label>
+              <label className="mb-2 block text-sm text-slate-700 dark:text-slate-300">Program Studi</label>
               <Controller
                 name="kd_prodi"
                 control={control}
@@ -317,7 +317,7 @@ export function UserPage() {
             </div>
           )}
 
-          <div className="flex justify-end gap-3 pt-4 border-t border-slate-800 mt-6">
+          <div className="flex justify-end gap-3 pt-4 border-t border-slate-200 dark:border-slate-800 mt-6">
             <Button type="button" variant="ghost" onClick={handleCancel}>
               Batal
             </Button>
@@ -329,7 +329,7 @@ export function UserPage() {
       </Modal>
 
       {isLoading ? (
-        <div className="rounded-xl border border-slate-800 bg-slate-900/50 p-8 text-center text-slate-500 shadow-lg">
+        <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 p-8 text-center text-slate-500 shadow-lg">
           Memuat data pengguna...
         </div>
       ) : (

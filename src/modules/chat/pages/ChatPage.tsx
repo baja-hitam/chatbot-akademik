@@ -25,7 +25,7 @@ export function ChatPage() {
     quickAccessQuery.isPending ||
     usageTipsQuery.isPending
   ) {
-    return <div className="grid h-dvh place-items-center bg-slate-950 text-slate-300">Memuat dashboard...</div>;
+    return <div className="grid h-dvh place-items-center bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-300">Memuat dashboard...</div>;
   }
 
   return (

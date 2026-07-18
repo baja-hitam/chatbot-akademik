@@ -53,7 +53,7 @@ export function DataTable<TData, TValue>({
         <div className="flex items-center">
           <div className="relative w-full md:w-72">
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-              <Search className="w-4 h-4 text-slate-400" />
+              <Search className="w-4 h-4 text-slate-600 dark:text-slate-400" />
             </div>
             <input
               type="text"
@@ -62,17 +62,17 @@ export function DataTable<TData, TValue>({
               onChange={(event) =>
                 table.getColumn(searchKey)?.setFilterValue(event.target.value)
               }
-              className="bg-slate-800 border border-slate-700 text-slate-200 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 p-2.5 transition-colors"
+              className="bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 p-2.5 transition-colors"
             />
           </div>
         </div>
       )}
 
       {/* Table Area */}
-      <div className="rounded-xl border border-slate-800 bg-slate-900/50 shadow-lg overflow-hidden">
+      <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 shadow-lg overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full text-sm text-left text-slate-300">
-            <thead className="text-xs text-slate-400 uppercase bg-slate-900/80 border-b border-slate-800">
+          <table className="w-full text-sm text-left text-slate-700 dark:text-slate-300">
+            <thead className="text-xs text-slate-600 dark:text-slate-400 uppercase bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
               {table.getHeaderGroups().map((headerGroup) => (
                 <tr key={headerGroup.id}>
                   {headerGroup.headers.map((header) => {
@@ -95,7 +95,7 @@ export function DataTable<TData, TValue>({
                 table.getRowModel().rows.map((row) => (
                   <tr
                     key={row.id}
-                    className="hover:bg-slate-800/40 transition-colors"
+                    className="hover:bg-slate-200 dark:hover:bg-slate-800/40 transition-colors"
                   >
                     {row.getVisibleCells().map((cell) => (
                       <td key={cell.id} className="px-6 py-4 whitespace-nowrap">
@@ -118,7 +118,7 @@ export function DataTable<TData, TValue>({
 
       {/* Pagination Controls */}
       <div className="flex items-center justify-between px-2 py-4">
-        <div className="flex-1 text-sm text-slate-400">
+        <div className="flex-1 text-sm text-slate-600 dark:text-slate-400">
           Halaman {table.getState().pagination.pageIndex + 1} dari{' '}
           {table.getPageCount()}
         </div>
@@ -126,7 +126,7 @@ export function DataTable<TData, TValue>({
           <button
             onClick={() => table.setPageIndex(0)}
             disabled={!table.getCanPreviousPage()}
-            className="p-1 rounded text-slate-400 hover:bg-slate-700 hover:text-indigo-400 disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:text-slate-400 disabled:cursor-not-allowed transition-colors"
+            className="p-1 rounded text-slate-600 dark:text-slate-400 hover:bg-slate-300 dark:hover:bg-slate-700 hover:text-indigo-400 disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:text-slate-400 disabled:cursor-not-allowed transition-colors"
             aria-label="First page"
           >
             <ChevronsLeft className="w-5 h-5" />
@@ -134,7 +134,7 @@ export function DataTable<TData, TValue>({
           <button
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
-            className="p-1 rounded text-slate-400 hover:bg-slate-700 hover:text-indigo-400 disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:text-slate-400 disabled:cursor-not-allowed transition-colors"
+            className="p-1 rounded text-slate-600 dark:text-slate-400 hover:bg-slate-300 dark:hover:bg-slate-700 hover:text-indigo-400 disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:text-slate-400 disabled:cursor-not-allowed transition-colors"
             aria-label="Previous page"
           >
             <ChevronLeft className="w-5 h-5" />
@@ -142,7 +142,7 @@ export function DataTable<TData, TValue>({
           <button
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
-            className="p-1 rounded text-slate-400 hover:bg-slate-700 hover:text-indigo-400 disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:text-slate-400 disabled:cursor-not-allowed transition-colors"
+            className="p-1 rounded text-slate-600 dark:text-slate-400 hover:bg-slate-300 dark:hover:bg-slate-700 hover:text-indigo-400 disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:text-slate-400 disabled:cursor-not-allowed transition-colors"
             aria-label="Next page"
           >
             <ChevronRight className="w-5 h-5" />
@@ -150,7 +150,7 @@ export function DataTable<TData, TValue>({
           <button
             onClick={() => table.setPageIndex(table.getPageCount() - 1)}
             disabled={!table.getCanNextPage()}
-            className="p-1 rounded text-slate-400 hover:bg-slate-700 hover:text-indigo-400 disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:text-slate-400 disabled:cursor-not-allowed transition-colors"
+            className="p-1 rounded text-slate-600 dark:text-slate-400 hover:bg-slate-300 dark:hover:bg-slate-700 hover:text-indigo-400 disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:text-slate-400 disabled:cursor-not-allowed transition-colors"
             aria-label="Last page"
           >
             <ChevronsRight className="w-5 h-5" />
@@ -175,7 +175,7 @@ export function DataTableColumnHeader<TData, TValue>({
   return (
     <button
       onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-      className="flex items-center space-x-1 hover:text-slate-100 transition-colors"
+      className="flex items-center space-x-1 hover:text-slate-900 dark:hover:text-slate-100 transition-colors"
     >
       <span>{title}</span>
       <ArrowUpDown className="w-3 h-3 ml-1" />

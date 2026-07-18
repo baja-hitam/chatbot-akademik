@@ -48,7 +48,7 @@ export function ChatHistoryPage() {
         cell: ({ row }) => (
           <Link
             to={`/admin/chat-history/${row.original.id}`}
-            className="p-2 rounded-lg text-indigo-400 hover:bg-slate-800 transition-colors inline-block"
+            className="p-2 rounded-lg text-indigo-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors inline-block"
             title="Lihat Pesan"
           >
             <Eye size={16} />
@@ -62,12 +62,12 @@ export function ChatHistoryPage() {
   return (
     <div className="p-4 md:p-8">
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-slate-100">History Chat</h1>
-        <p className="mt-1 text-sm text-slate-400">Pantau riwayat percakapan pengguna dengan chatbot</p>
+        <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100">History Chat</h1>
+        <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">Pantau riwayat percakapan pengguna dengan chatbot</p>
       </div>
 
       {isLoading ? (
-        <div className="rounded-xl border border-slate-800 bg-slate-900/50 p-8 text-center text-slate-500 shadow-lg">
+        <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 p-8 text-center text-slate-500 shadow-lg">
           Memuat riwayat chat...
         </div>
       ) : (

@@ -14,7 +14,7 @@ const badgeMap: Record<AnnouncementStatus, string> = {
 
 export function Badge({ status, children }: BadgeProps) {
   return (
-    <span className="inline-flex items-center gap-2 text-xs text-slate-300">
+    <span className="inline-flex items-center gap-2 text-xs text-slate-700 dark:text-slate-300">
       <span className={['h-2.5 w-2.5 rounded-full', badgeMap[status]].join(' ')} />
       {children}
     </span>

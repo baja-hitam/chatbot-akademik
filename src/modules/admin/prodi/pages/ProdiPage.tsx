@@ -92,14 +92,14 @@ export function ProdiPage() {
             <div className="flex items-center justify-end gap-2">
               <button
                 onClick={() => handleEdit(prodi)}
-                className="rounded-lg p-2 text-slate-400 hover:bg-slate-700 hover:text-indigo-400 transition-colors"
+                className="rounded-lg p-2 text-slate-600 dark:text-slate-400 hover:bg-slate-300 dark:hover:bg-slate-700 hover:text-indigo-400 transition-colors"
                 title="Edit"
               >
                 <Edit2 size={16} />
               </button>
               <button
                 onClick={() => handleDelete(prodi.kd_prodi)}
-                className="rounded-lg p-2 text-slate-400 hover:bg-slate-700 hover:text-red-400 transition-colors"
+                className="rounded-lg p-2 text-slate-600 dark:text-slate-400 hover:bg-slate-300 dark:hover:bg-slate-700 hover:text-red-400 transition-colors"
                 title="Hapus"
               >
                 <Trash2 size={16} />
@@ -116,8 +116,8 @@ export function ProdiPage() {
     <div className="p-4 md:p-8">
       <div className="mb-8 flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-slate-100">Master Prodi</h1>
-          <p className="text-sm text-slate-400 mt-1">Kelola data program studi di sini.</p>
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100">Master Prodi</h1>
+          <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">Kelola data program studi di sini.</p>
         </div>
         <Button onClick={() => setIsFormOpen(true)}>
           <Plus size={16} /> Tambah Prodi
@@ -132,26 +132,26 @@ export function ProdiPage() {
         <form onSubmit={handleSubmit} className="space-y-4">
           {editingProdi && (
             <div>
-              <label className="mb-2 block text-sm text-slate-300">Kode Prodi</label>
+              <label className="mb-2 block text-sm text-slate-700 dark:text-slate-300">Kode Prodi</label>
               <input
                 type="text"
                 disabled
                 value={editingProdi.kd_prodi}
-                className="w-full rounded-lg border border-slate-700 bg-slate-800 p-2.5 text-slate-200 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 disabled:opacity-50"
+                className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 p-2.5 text-slate-800 dark:text-slate-200 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 disabled:opacity-50"
               />
             </div>
           )}
           <div>
-            <label className="mb-2 block text-sm text-slate-300">Nama Prodi</label>
+            <label className="mb-2 block text-sm text-slate-700 dark:text-slate-300">Nama Prodi</label>
             <input
               type="text"
               required
               value={formData.nama_prodi}
               onChange={(e) => setFormData({ ...formData, nama_prodi: e.target.value })}
-              className="w-full rounded-lg border border-slate-700 bg-slate-800 p-2.5 text-slate-200 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              className="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 p-2.5 text-slate-800 dark:text-slate-200 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
             />
           </div>
-          <div className="flex justify-end gap-3 pt-4 border-t border-slate-800 mt-6">
+          <div className="flex justify-end gap-3 pt-4 border-t border-slate-200 dark:border-slate-800 mt-6">
             <Button type="button" variant="ghost" onClick={handleCancel}>
               Batal
             </Button>
@@ -163,7 +163,7 @@ export function ProdiPage() {
       </Modal>
 
       {isLoading ? (
-        <div className="rounded-xl border border-slate-800 bg-slate-900/50 p-8 text-center text-slate-500 shadow-lg">
+        <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 p-8 text-center text-slate-500 shadow-lg">
           Memuat data...
         </div>
       ) : (

@@ -38,13 +38,13 @@ export function DashboardLayout({
   };
 
   return (
-    <main className="h-dvh bg-slate-950 text-slate-100">
+    <main className="h-dvh bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100">
       {(isSidebarOpen || isWidgetPanelOpen) && (
         <button
           type="button"
           aria-label="Tutup panel"
           onClick={closePanels}
-          className="fixed inset-0 z-30 bg-slate-950/60 xl:hidden"
+          className="fixed inset-0 z-30 bg-slate-900/60 dark:bg-slate-950/60 xl:hidden"
         />
       )}
 

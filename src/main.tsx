@@ -5,12 +5,16 @@ import { AuthProvider } from './app/providers/AuthProvider'
 import { AppRouterProvider } from './app/providers/AppRouterProvider'
 import { QueryProvider } from './app/providers/QueryProvider'
 
+import { ThemeProvider } from './app/providers/themeContext'
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <AuthProvider>
-      <QueryProvider>
-        <AppRouterProvider />
-      </QueryProvider>
-    </AuthProvider>
+    <ThemeProvider defaultTheme="system" storageKey="chatbot-akademik-theme">
+      <AuthProvider>
+        <QueryProvider>
+          <AppRouterProvider />
+        </QueryProvider>
+      </AuthProvider>
+    </ThemeProvider>
   </StrictMode>,
 )

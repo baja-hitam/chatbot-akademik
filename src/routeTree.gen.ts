@@ -20,6 +20,8 @@ import { Route as AuthenticatedUserIndexRouteImport } from './routes/_authentica
 import { Route as AuthenticatedAdminUsersRouteImport } from './routes/_authenticated/admin/users'
 import { Route as AuthenticatedAdminProdiRouteImport } from './routes/_authenticated/admin/prodi'
 import { Route as AuthenticatedAdminKnowledgeBaseRouteImport } from './routes/_authenticated/admin/knowledge-base'
+import { Route as AuthenticatedAdminChatHistoryIndexRouteImport } from './routes/_authenticated/admin/chat-history.index'
+import { Route as AuthenticatedAdminChatHistorySessionIdRouteImport } from './routes/_authenticated/admin/chat-history.$sessionId'
 
 const VerifyOtpRoute = VerifyOtpRouteImport.update({
   id: '/verify-otp',
@@ -75,6 +77,18 @@ const AuthenticatedAdminKnowledgeBaseRoute =
     path: '/knowledge-base',
     getParentRoute: () => AuthenticatedAdminRoute,
   } as any)
+const AuthenticatedAdminChatHistoryIndexRoute =
+  AuthenticatedAdminChatHistoryIndexRouteImport.update({
+    id: '/chat-history/',
+    path: '/chat-history/',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminChatHistorySessionIdRoute =
+  AuthenticatedAdminChatHistorySessionIdRouteImport.update({
+    id: '/chat-history/$sessionId',
+    path: '/chat-history/$sessionId',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedUserIndexRoute
@@ -86,6 +100,8 @@ export interface FileRoutesByFullPath {
   '/admin/prodi': typeof AuthenticatedAdminProdiRoute
   '/admin/users': typeof AuthenticatedAdminUsersRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
+  '/admin/chat-history/$sessionId': typeof AuthenticatedAdminChatHistorySessionIdRoute
+  '/admin/chat-history/': typeof AuthenticatedAdminChatHistoryIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof AuthenticatedUserIndexRoute
@@ -96,6 +112,8 @@ export interface FileRoutesByTo {
   '/admin/prodi': typeof AuthenticatedAdminProdiRoute
   '/admin/users': typeof AuthenticatedAdminUsersRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
+  '/admin/chat-history/$sessionId': typeof AuthenticatedAdminChatHistorySessionIdRoute
+  '/admin/chat-history': typeof AuthenticatedAdminChatHistoryIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -110,6 +128,8 @@ export interface FileRoutesById {
   '/_authenticated/admin/users': typeof AuthenticatedAdminUsersRoute
   '/_authenticated/_user/': typeof AuthenticatedUserIndexRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
+  '/_authenticated/admin/chat-history/$sessionId': typeof AuthenticatedAdminChatHistorySessionIdRoute
+  '/_authenticated/admin/chat-history/': typeof AuthenticatedAdminChatHistoryIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -123,6 +143,8 @@ export interface FileRouteTypes {
     | '/admin/prodi'
     | '/admin/users'
     | '/admin/'
+    | '/admin/chat-history/$sessionId'
+    | '/admin/chat-history/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -133,6 +155,8 @@ export interface FileRouteTypes {
     | '/admin/prodi'
     | '/admin/users'
     | '/admin'
+    | '/admin/chat-history/$sessionId'
+    | '/admin/chat-history'
   id:
     | '__root__'
     | '/_authenticated'
@@ -146,6 +170,8 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/users'
     | '/_authenticated/_user/'
     | '/_authenticated/admin/'
+    | '/_authenticated/admin/chat-history/$sessionId'
+    | '/_authenticated/admin/chat-history/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -234,6 +260,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminKnowledgeBaseRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
+    '/_authenticated/admin/chat-history/': {
+      id: '/_authenticated/admin/chat-history/'
+      path: '/chat-history'
+      fullPath: '/admin/chat-history/'
+      preLoaderRoute: typeof AuthenticatedAdminChatHistoryIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/chat-history/$sessionId': {
+      id: '/_authenticated/admin/chat-history/$sessionId'
+      path: '/chat-history/$sessionId'
+      fullPath: '/admin/chat-history/$sessionId'
+      preLoaderRoute: typeof AuthenticatedAdminChatHistorySessionIdRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
   }
 }
 
@@ -253,6 +293,8 @@ interface AuthenticatedAdminRouteChildren {
   AuthenticatedAdminProdiRoute: typeof AuthenticatedAdminProdiRoute
   AuthenticatedAdminUsersRoute: typeof AuthenticatedAdminUsersRoute
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+  AuthenticatedAdminChatHistorySessionIdRoute: typeof AuthenticatedAdminChatHistorySessionIdRoute
+  AuthenticatedAdminChatHistoryIndexRoute: typeof AuthenticatedAdminChatHistoryIndexRoute
 }
 
 const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
@@ -260,6 +302,10 @@ const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
   AuthenticatedAdminProdiRoute: AuthenticatedAdminProdiRoute,
   AuthenticatedAdminUsersRoute: AuthenticatedAdminUsersRoute,
   AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+  AuthenticatedAdminChatHistorySessionIdRoute:
+    AuthenticatedAdminChatHistorySessionIdRoute,
+  AuthenticatedAdminChatHistoryIndexRoute:
+    AuthenticatedAdminChatHistoryIndexRoute,
 }
 
 const AuthenticatedAdminRouteWithChildren =
